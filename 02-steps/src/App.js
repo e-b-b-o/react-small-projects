@@ -5,6 +5,7 @@ const messages = [
   "Apply for jobs 💼",
   "Invest your new income 🤑",
 ];
+
 export default function App() {
   return (
     <div>
@@ -58,12 +59,11 @@ function Steps() {
               style={{ backgroundColor: "#7950f2", color: "#fff" }}
               onClick={handleNext}
             >
-              {" "}
-              Next{" "}
+              Next
             </button>
           </div>
         </div>
-      )}{" "}
+      )}
     </div>
   );
 }
