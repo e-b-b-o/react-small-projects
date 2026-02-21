@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -10,13 +10,12 @@ const containerStyle = {
 const starContainerStyle = {
   display: "flex",
 };
-StarRating.PropTypes
 
 export default function StarRating({
   maxRating = 5,
   color = "#fcc419",
-  size = "48",
-  defaultRating = "",
+  size = 48,
+  defaultRating = 0,
   messages = [],
   onSetRating,
 }) {
@@ -25,7 +24,7 @@ export default function StarRating({
 
   function handleRate(rating) {
     setRating(rating);
-    onSetRating(rating);
+    onSetRating?.(rating);
   }
 
   const textStyle = {
@@ -38,9 +37,8 @@ export default function StarRating({
     <div style={containerStyle}>
       <div style={starContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
-          <span>
+          <span key={i}>
             <Star
-              key={i}
               full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
               onRate={() => handleRate(i + 1)}
               onHoverIn={() => setTempRating(i + 1)}
@@ -59,6 +57,15 @@ export default function StarRating({
     </div>
   );
 }
+
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  color: PropTypes.string,
+  size: PropTypes.number,
+  defaultRating: PropTypes.number,
+  messages: PropTypes.array,
+  onSetRating: PropTypes.func,
+};
 
 function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
   const starStyle = {
